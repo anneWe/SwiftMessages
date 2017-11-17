@@ -44,6 +44,18 @@ class Presenter: NSObject {
     var presentationContext = PresentationContext.viewController(Weak<UIViewController>(value: nil))
     let animator: Animator
 
+	/**
+	Added by awe (appsfactory).
+	trailing space of message view to its superview
+	*/
+	var trailingConstraint: NSLayoutConstraint?
+	/**
+	Added by awe (appsfactory).
+	leading space of message view to its superview
+	*/
+	var leadingConstraint: NSLayoutConstraint?
+	
+	
     init(config: SwiftMessages.Config, view: UIView, delegate: PresenterDelegate) {
         self.config = config
         self.view = view
@@ -341,6 +353,11 @@ class Presenter: NSObject {
             maskingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
             topLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
             bottomLayoutConstraint(view: maskingView, containerView: containerView, viewController: presentationContext.viewControllerValue()).isActive = true
+   			
+			/// Added by awe (appsfactory).
+			self.trailingConstraint = maskingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+			self.leadingConstraint  = maskingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+			
             // Update the container view's layout in order to know the masking view's frame
             containerView.layoutIfNeeded()
         }

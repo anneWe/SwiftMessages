@@ -485,15 +485,17 @@ open class SwiftMessages {
 	Changes the trailing space of the message to its superview to `trailingSpace` value
 	*/
 	open func updateTrailingSpace(trailingSpace: CGFloat) {
-		self.current?.trailingConstraint?.constant = trailingSpace
-	}
+        guard let current = _current, !current.isHiding else { return }
+        current.trailingConstraint?.constant = trailingSpace
+    }
 	
 	/**
 	Added by awe (appsfactory)
 	Changes the leading space of the message to its superview to `leadingSpace` value
 	*/
 	open func updateLeadingSpace(leadingSpace: CGFloat) {
-		self.current?.leadingConstraint?.constant = leadingSpace
+        guard let current = _current, !current.isHiding else { return }
+        current.leadingConstraint?.constant = leadingSpace
 	}
 	
     /**
